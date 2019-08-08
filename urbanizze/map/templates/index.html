@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1>Urbanizze</h1>
+                <p>Visualize. Entenda. Decida.</p>
+                <p>
+                    <a class="btn btn-primary btn-lg" href="{% url 'home:research' %}" role="button">
+                        Começe agora mesmo &raquo;
+                    </a>
+                </p>
+            </div>
+        </div><!-- col-md-12 -->
+    </div><!-- row -->
+
+{% endblock content %}
+
+
+{% block footer %}
+    <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+{% endblock footer %}

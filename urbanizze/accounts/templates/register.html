@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <h1>Novo usuário</h1>
+            <hr>
+
+            <form action="." method="post" class="form">
+                {% csrf_token %}
+                {% bootstrap_form form layout='inline' %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary" style="font-size: small">
+                        REGISTRAR
+                    </button>
+                {% endbuttons %}
+            </form>
+
+        </div><!-- col-md-12 -->
+    </div><!-- row -->
+
+{% endblock %}

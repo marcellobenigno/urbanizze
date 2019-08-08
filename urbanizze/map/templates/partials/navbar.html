@@ -1,0 +1,44 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home:home' %}">Urbanizze</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                    <a href="{% url 'home:home' %}">Início</a>
+                </li>
+                <li class="{% if request.resolver_match.url_name == 'cadastro' %}active{% endif %}">
+                    <a href="{% url 'home:cadastro' %}">Nova consulta</a>
+                </li>
+                <li class="{% if request.resolver_match.url_name == 'terrenos' %}active{% endif %}">
+                    <a href="{% url 'home:terrenos' %}">Lista de consultas</a>
+                </li>
+                <!-- <li> -->
+                <!--     <a href="#about">Sobre</a> -->
+                <!-- </li> -->
+                <!-- <li> -->
+                <!--     <a href="#contact">Contato</a> -->
+                <!-- </li> -->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <li style>
+                  <a href="{% url 'accounts:logout' %}">{{ user.username }} - Logout</a>
+                </li>
+                {% else %}
+                <li style>
+                    <a href="{% url 'accounts:login' %}">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>

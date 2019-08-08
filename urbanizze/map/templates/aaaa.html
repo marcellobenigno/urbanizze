@@ -1,0 +1,132 @@
+<!-- mapserver template -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>WEBCADASTRO</title>
+<link href="[root]/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="[root]/css/main.css" rel="stylesheet">
+<link rel="shortcut icon" href="[root]/img/mapserver.ico"/>
+<script type="text/javascript" src="[root]/js/main.js"></script>
+<link rel="stylesheet" type="text/css" href="[root]/css/main.css">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+aria-expanded="false" aria-controls="navbar">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="#">Mapserver Bootstrap</a>
+</div>
+<div id="navbar" class="collapse navbar-collapse">
+<ul class="nav navbar-nav">
+<li class="active"><a href="#">Início</a></li>
+<li><a href="#">Mapa</a></li>
+<li><a href="#about">Sobre</a></li>
+<li><a href="#contact">Contato</a></li>
+</ul>
+</div><!--/.nav-collapse -->
+</div>
+</nav>
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-12">
+<a href="javascript:zoomExtend();" title="Zoom Extendido">
+<img src="[root]/etc/botoes/extent.png"/>
+</a>
+<a href="javascript:zoomIn();" title="Aproximar">
+<img src="[root]/etc/botoes/in.png"/>
+</a>
+<a href="javascript:zoomOut();" title="Afastar">
+<img src="[root]/etc/botoes/out.png"/>
+</a>
+<a href="javascript:pan();" title="Mover">
+<img src="[root]/etc/botoes/pan.png"/>
+</a>
+<a href="javascript:query();" title="Consultar">
+<img src="[root]/etc/botoes/attributes.png"/>
+</a>
+</div>
+
+
+<div class="col-md-9">
+<form name="form" action="[program]" method="get">
+<input name="img" type="image" src="[img]" class="img-thumbnail"/>
+
+<p>
+<img alt="escala" src="[scalebar]" class="img-thumbnail"/>
+</p>
+
+</div>
+
+<div class="col-md-3">
+
+<img alt="mapa de referência" src="[ref]"/>
+
+<br/>
+
+<hr/>
+
+<h3>Camadas:</h3>
+
+<p><input type="checkbox" name="layer" value="logradouros" onclick="javascript:reload();"
+[logradouros_check]/>Ruas e Avenidas</p>
+<p><input type="checkbox" name="layer" value="lotes" onclick="javascript:reload();" [lotes_check]/>Lotes</p>
+<p><input type="checkbox" name="layer" value="postes" onclick="javascript:reload();" [postes_check]/>Postes
+</p>
+<p><input type="checkbox" name="layer" value="bairros" onclick="javascript:reload();" [bairros_check]/>Bairros
+</p>
+<p><input type="checkbox" name="layer" value="quick_bird" onclick="javascript:reload();"
+[quick_bird_check]/>Imagem de Satélite</p>
+
+<br/>
+
+<hr/>
+
+<h3>Legenda:</h3>
+
+<img alt="legenda" src="[legend]"/>
+
+
+</div>
+
+<input name="program" type="hidden" value="[program]"/>
+
+<input name="map" type="hidden" value="[map]"/>
+
+<input name="imgext" type="hidden" value="[mapext]"/>
+
+<input name="imgxy" type="hidden" value="[center]"/>
+
+<input name="zoomsize" type="hidden" value="2"/>
+
+<input name="mapext" type="hidden" value="shapes"/>
+
+<input name="root" type="hidden" value="[root]"/>
+
+<input name="mode" value="browse" type="hidden"/>
+
+<input name="zoomdir" value="0" type="hidden"/>
+
+<input name="mapwidth" value="[mapwidth]" type="hidden"/>
+
+<input name="mapheight" value="[mapheight]" type="hidden"/>
+
+</form>
+
+
+</div><!-- row -->
+</div><!-- container -->
+
+
+</body>
+</html>

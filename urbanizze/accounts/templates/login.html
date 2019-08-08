@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <h1>Autenticação</h1>
+            <hr>
+
+            <form action="." method="post" class="form">
+                {% csrf_token %}
+                {% bootstrap_form form layout='inline' %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary" style="font-size: small">
+                        LOGIN
+                    </button>
+                    <a href="{% url 'accounts:register' %}" class="btn btn-primary" style="font-size: small">
+                        CADASTRO DE NOVO USUÁRIO
+                    </a>
+                {% endbuttons %}
+            </form>
+
+        </div><!-- col-md-12 -->
+    </div><!-- row -->
+
+{% endblock %}

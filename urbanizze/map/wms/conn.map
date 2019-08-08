@@ -1,0 +1,2 @@
+CONNECTIONTYPE POSTGIS
+CONNECTION "host=localhost port=5432 dbname=urbanizze user=postgres password=postgres"

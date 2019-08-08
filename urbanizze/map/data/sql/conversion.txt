@@ -1,0 +1,1 @@
+shp2pgsql -t "2D" -s 4326 -a -S map_zona.shp map_zona > ../sql/map_zona.sql

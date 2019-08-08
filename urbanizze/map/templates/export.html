@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+			<h1>Análise do Potencial construtivo</h1>
+			<hr>
+
+			<ul>
+				<li>1. Assista o tutorial abaixo para compreender como utilizá-lo.</li>
+				<br>
+				<video width="900" height="535" controls>
+					<source src="{{ MEDIA_URL }}docs/grupoBIM/prototipo-tutorial.mp4" type="video/mp4">
+				</video>
+				<br>
+				<br>
+				<li>2. Realize o levantamento Topográfico com um profisional.</li>
+				<li><a rel="nofollow" href="{{ MEDIA_URL }}docs/grupoBIM.rar" download>3. Clique aqui para baixar o arquivo template do Revit.</a></li>
+            </ul>
+						<!-- <a rel="nofollow" href="{{ MEDIA_URL }}terreno_{{ pk }}.dxf" download>Clique aqui para baixar o arquivo DXF</a> -->
+				<!-- <br> -->
+        </div><!-- col-md-12 -->
+
+
+
+	</div><!-- row -->
+
+{% endblock content %}
+
+
+{% block footer %}
+    <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+{% endblock footer %}

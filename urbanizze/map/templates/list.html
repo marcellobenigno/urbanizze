@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+			<h1>Relação dos terrenos</h1>
+            <hr>
+
+			<h4></h4>
+			<h5>Para visualizar os detalhes do terreno acessar o link através da descrição do terreno consultado.</h5>
+			<h1></h1>
+			<br>
+
+            <ul>
+                {% for terreno in terrenos %}
+                {% if terreno.account_id == user.id or user.is_superuser %}
+                <li>
+					Descrição do Terreno: <a href="{% url 'home:result' terreno.pk %}">{{ terreno.descricao }}</a><br>
+                    Zona: {{ terreno.zona }}
+					{% if user.is_superuser %}
+					<p/>
+					Usuário: {{ terreno.username }}
+					{% endif %}
+                </li>
+				<br>
+                {% endif %}
+                {% endfor %}
+            </ul>
+
+        </div><!-- col-md-12 -->
+
+    </div><!-- row -->
+
+{% endblock content %}
+
+
+{% block footer %}
+    <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+{% endblock footer %}

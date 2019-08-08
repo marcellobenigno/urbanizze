@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1>Urbanizze</h1>
+                <p></p>
+                <p>Esse website é parte de um pesquisa científica em desenvolvimento no laboratório de
+                   Modelagem e Prototipagem – LM+P vinculado ao programa de Pós-graduação
+                   de Arquitetura e Urbanismo da Universidade Federal da Paraíba.</p>
+                <p><strong>Você tem interesse em participar como voluntário para conhecer os
+                  resultados de sua aplicação?</strong></p>
+                <p></p>
+				<form action="#" method="post">
+                {% csrf_token %}
+                <p>
+                    <input type="submit" value="SIM" class="btn btn-primary btn-lg" role="button" style="font-size: small" name="research-approved"\>
+                    <input type="submit" value="NÃO" class="btn btn-primary btn-lg" role="button" style="font-size: small" name="research-denied"\>
+                </p>
+				</form>
+            </div>
+        </div><!-- col-md-12 -->
+    </div><!-- row -->
+
+{% endblock content %}
+
+
+{% block footer %}
+    <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+{% endblock footer %}
+
+
+
+

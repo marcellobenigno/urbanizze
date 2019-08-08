@@ -1,0 +1,10 @@
+Olá!
+
+Muito obrigado por se cadastrar no Urbanizze.
+
+Você realizou o cadastro como o nome de usuário:
+{{ username }}
+
+Atenciosamente,
+
+Antonio Jr Farias

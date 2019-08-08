@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+           <h1>Resultados</h1>
+            <hr>
+
+			<h4>Seu terreno se localiza na zona urbana {{ zona }} ({{ zona_extenso }}) da cidade de {{ cidade }}.</h4>
+
+			<p>De acordo com o mapa de macrozoneamento dessa cidade seu terreno está numa Zona Adensável Prioritária (ZAP)
+			onde é permitido construir até 4 (quatro) vezes a area do seu terreno.</p>
+
+			<h3>Quanto ao tipo de edificação que você deseja construir:</h3>
+
+			{% if numero_uso_permitido == 1 %}
+			<p>Sim, é permitido atividade {{ tipo_edificacao }} com {{ numero_pavimento }} pavimento(s) nessa área da cidade em uma única forma de uso:</p>
+			{% elif numero_uso_permitido > 1 %}
+			<p>Sim, é permitido atividade {{ tipo_edificacao }} com {{ numero_pavimento }} pavimento(s) nessa área da cidade em {{ numero_uso_permitido }} diferentes usos.
+			São eles:</p>
+			{% else %}
+			<p>Não é permitido atividade {{ tipo_edificacao }}. Sendo permitido {{ numero_uso_permitido }} diferentes usos. São eles:</p>
+			{% endif %}
+
+			{% for uso in uso_permitido %}
+            <ul>
+				<li>{{ uso }}</li>
+            </ul>
+			{% endfor %}
+
+			<br>
+
+			<table class="table table-reflow table-bordered">
+			<thead>
+				<tr>
+					<th colspan="1" scope="colgroup">USOS</th>
+					<th colspan="2" scope="colgroup">LOTE</th>
+					<th colspan="5" scope="colgroup">EDIFICAÇÃO</th>
+				</tr>
+
+				<tr>
+				<th>Permitido</th>
+				<th>Área mínima</th>
+				<th>Frente mínima</th>
+				<th>Taxa de ocupação máxima (%)</th>
+				<th>Altura máxima</th>
+				<th>Afastamento frente</th>
+				<th>Afastamento lateral</th>
+				<th>Afastamento fundos</th>
+				</tr>
+			</thead>
+			{% for cod in cod_result %}
+			{% if cod.uso_permitido in uso_permitido %}
+			<tbody>
+				<td>{{ cod.uso_permitido }}</th>
+				<td>{{ cod.area_minima }}</td>
+				<td>{{ cod.frente_minima }}</td>
+				<td>{{ cod.taxa_ocupacao }}</td>
+				<td>{{ cod.altura_maxima }}</td>
+				<td>{{ cod.afast_frente }}</td>
+				<td>{{ cod.afast_lateral }}</td>
+				<td>{{ cod.afast_fundos }}</td>
+				</tr>
+			</tbody>
+			{% endif %}
+			{% endfor %}
+			</table>
+
+			<br>
+
+			<h3>Entenda o que significa cada parâmetro das zonas urbanas de {{ cidade }}.</h3>
+			<h4>Do Lote Urbano</h4>
+			<h5>Área Mínima:</h5>
+			<p>Corresponde ao valor mínimo a ser considerado para a área do seu lote para o uso permitido que se deseja construir.</p>
+			<h5>Frente Mínima:</h5>
+			<p>Corresponde ao valor mínimo a ser considerado dimensão linear do muro frontal ou testada do terreno para o uso permitido que se deseja construir.</p>
+
+			<br>
+			<h4>Da Edificação</h4>
+			<h5>Taxa de Ocupação Máxima:</h5>
+			<p>Essa taxa é o valor correspondente ao valor máximo que a projeção da área do perímetro da edificação pode ter sobre a área do terreno.</p>
+			<h5>Indice de aproveitamento:</h5>
+			<p>Esse número corresponde um valor que multiplicado pela área do terreno informará quantidade máxima permitida para a área construída da edificação.</p>
+			<h5>Altura Máxima:</h5>
+			<p>Esse valor corresponde ao número máxima de pavimentos que a edificação poderá obter.</p>
+			<h5>Afastamentos de frente, lateral e fundos:</h5>
+			<p>Esses valores correspondem às distâncias mínimas que a edificação deve ter dessas divisas do terreno.</p>
+
+			<br>
+			<h3>Em relação a quantidade de pavimentos da sua edificação:</h3>
+
+			{% if numero_uso_permitido == 1 %}
+			<p>Sim, é possível ter {{ numero_pavimento }} pavimento(s) para um único tipo de uso {{ terreno.edification_type }} permitido na {{ zona_extenso }} ({{ zona }}).</p>
+			{% elif numero_uso_permitido > 1 %}
+			<p>Sim, é possível ter {{ numero_pavimento }} pavimento(s) para qualquer um dos tipos de uso {{ terreno.edification_type }} permitido na {{ zona_extenso }} ({{ zona }}).</p>
+			{% else %}
+			<p>Não é permitido ter {{ numero_pavimento }} pavimento(s) para os tipos de uso {{ terreno.edification_type }} na {{ zona_extenso }} ({{ zona }}).</p>
+			{% endif %}
+
+			<br>
+			<h4>Gostaria de visualizar o potencial construtivo do seu terreno utilizando esses parâmetros da {{ zona_extenso }}?</h4>
+			<p>
+				<a class="btn btn-primary btn-lg" href="{% url 'home:export' terreno.pk %}" role="button" style="font-size: small">
+					SIM
+				</a>
+				<a class="btn btn-primary btn-lg" href="{% url 'home:cadastro' %}" role="button" style="font-size: small">
+					NÃO
+				</a>
+			</p>
+			<br>
+
+			<h5>Todas as informações aqui apresentadas foram extraídas do Código de Urbanismo da cidade de João Pessoa. Caso deseje consultar na íntegra o documento disponível no site da prefeitura
+			<a href="http://www.joaopessoa.pb.gov.br/portal/wp-content/uploads/2012/03/codi_urba.pdf?x92016">clique aqui.</a></h5>
+
+			<br>
+			<br>
+
+        </div><!-- col-md-12 -->
+
+    </div><!-- row -->
+
+{% endblock content %}
+
+
+{% block footer %}
+    <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+{% endblock footer %}
+

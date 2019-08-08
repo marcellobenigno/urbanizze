@@ -1,0 +1,68 @@
+LAYER
+    NAME 'zonas'
+    STATUS default
+    TYPE polygon
+
+    INCLUDE 'conn.map'
+    DATA "geom from map_zona using unique id using srid=4326"
+
+    PROJECTION
+      "init=epsg:4326"
+    END #projection
+
+    OPACITY 50
+
+
+    CLASSITEM 'nome'
+
+    CLASS
+        NAME 'Zona A'
+        EXPRESSION 'A'
+        STYLE
+            COLOR 251 180 174
+            OUTLINECOLOR 125 125 125
+            WIDTH 1
+        END #sytle
+    END #class
+
+    CLASS
+        NAME 'Zona B'
+        EXPRESSION 'B'
+        STYLE
+            COLOR 179 205 227
+            OUTLINECOLOR 125 125 125
+            WIDTH 1
+        END #sytle
+    END #class
+
+    CLASS
+        NAME 'Zona C'
+        EXPRESSION 'C'
+        STYLE
+            COLOR  204 235 197
+            OUTLINECOLOR 125 125 125
+            WIDTH 1
+        END #sytle
+    END #class
+
+    CLASS
+        NAME 'Zona D'
+        EXPRESSION 'D'
+        STYLE
+            COLOR 222 203 228
+            OUTLINECOLOR 125 125 125
+            WIDTH 1
+        END #sytle
+    END #class
+
+    CLASS
+        NAME 'Zona E'
+        EXPRESSION 'E'
+        STYLE
+            COLOR 254 217 166
+            OUTLINECOLOR 125 125 125
+            WIDTH 1
+        END #sytle
+    END #class
+
+END #layer

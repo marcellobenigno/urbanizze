@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="error-template">
+		<h2>Lamentamos...</h2>
+		<div class="error-details">
+		...mas nosso banco de dados ainda não tem informações suficientes para responder essa questão.
+		</div>
+		<br>
+		<p>
+			<a class="btn btn-primary btn-lg" href="{% url 'home:cadastro' %}" role="button" style="font-size: small">
+				CADASTRAR NOVO TERRENO
+			</a>
+			<a class="btn btn-primary btn-lg" href="{% url 'home:terrenos' %}" role="button" style="font-size: small">
+				VISUALIZAR LISTA DE TERRENOS
+			</a>
+		</p>
+</div>
+
+{% endblock content %}

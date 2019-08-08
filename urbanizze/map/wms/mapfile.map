@@ -1,0 +1,28 @@
+MAP
+	NAME 'Urbanizze-WMS'
+	EXTENT -34.8399 -7.12589 -34.8225 -7.11441
+	UNITS DD
+	SIZE 800 600
+
+	IMAGECOLOR 255 255 255
+	IMAGEQUALITY 95
+	IMAGETYPE png
+
+	PROJECTION
+      "init=epsg:3857"
+    END #projection
+
+	WEB
+		IMAGEPATH '../tmp/'
+		IMAGEURL '/tmp/'
+		METADATA
+		  'ows_title'           'Urbanizze-WMS'
+		  'ows_onlineresource'  'http://localhost/cgi-bin/mapserv?map=/home/marcello/code/urbanizze_src/urbanizze/map/wms/mapfile.map&'
+		  'ows_srs'             'EPSG:3857 EPSG:4326 EPSG:900913'
+		  'wms_enable_request'  '*'
+		END
+	END
+
+	INCLUDE 'layers/zona.map'
+
+END #map

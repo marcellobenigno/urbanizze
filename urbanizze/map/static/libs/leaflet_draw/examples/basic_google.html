@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet.draw drawing and editing tools</title>
+
+	<link rel="stylesheet" href="libs/leaflet.css" />
+	<link rel="stylesheet" href="../dist/leaflet.draw.css" />
+
+</head>
+<body>
+	<div id="map" style="width: 800px; height: 600px; border: 1px solid #ccc"></div>
+
+	<script src="libs/leaflet-src.js"></script>
+
+	<script src="../src/Leaflet.draw.js"></script>
+
+	<script src="../src/edit/handler/Edit.Poly.js"></script>
+	<script src="../src/edit/handler/Edit.SimpleShape.js"></script>
+	<script src="../src/edit/handler/Edit.Circle.js"></script>
+	<script src="../src/edit/handler/Edit.Rectangle.js"></script>
+
+	<script src="../src/draw/handler/Draw.Feature.js"></script>
+	<script src="../src/draw/handler/Draw.Polyline.js"></script>
+	<script src="../src/draw/handler/Draw.Polygon.js"></script>
+	<script src="../src/draw/handler/Draw.SimpleShape.js"></script>
+	<script src="../src/draw/handler/Draw.Rectangle.js"></script>
+	<script src="../src/draw/handler/Draw.Circle.js"></script>
+	<script src="../src/draw/handler/Draw.Marker.js"></script>
+
+	<script src="../src/ext/LatLngUtil.js"></script>
+	<script src="../src/ext/GeometryUtil.js"></script>
+	<script src="../src/ext/LineUtil.Intersect.js"></script>
+	<script src="../src/ext/Polyline.Intersect.js"></script>
+	<script src="../src/ext/Polygon.Intersect.js"></script>
+
+	<script src="../src/Control.Draw.js"></script>
+	<script src="../src/Tooltip.js"></script>
+	<script src="../src/Toolbar.js"></script>
+
+	<script src="../src/draw/DrawToolbar.js"></script>
+	<script src="../src/edit/EditToolbar.js"></script>
+	<script src="../src/edit/handler/EditToolbar.Edit.js"></script>
+	<script src="../src/edit/handler/EditToolbar.Delete.js"></script>
+	<script src="http://maps.google.com/maps/api/js?v=3"></script>
+	<script src="../layer/tile/Google.js"></script>
+	
+	<script>
+		var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+			osm = L.tileLayer(osmUrl, {maxZoom: 18});
+
+		var ggl = new L.Google('SATELLITE');
+		var ggl2 = new L.Google('TERRAIN');
+
+			map = new L.Map('map', {layers: [ggl], center: new L.LatLng( -7.1107512, -34.830629), zoom: 15 });
+
+		var drawnItems = new L.FeatureGroup();
+		map.addLayer(drawnItems);
+
+		// Set the title to show on the polygon button
+		L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a sexy polygon!';
+
+		var drawControl = new L.Control.Draw({
+			position: 'topright',
+			draw: {
+				polyline: false,
+				polygon: {
+					allowIntersection: false,
+					showArea: true,
+					drawError: {
+						color: '#b00b00',
+						timeout: 1000
+					},
+					shapeOptions: {
+						color: '#bada55'
+					}
+				},
+				circle: false,
+				rectangle:false,
+				marker: false
+			},
+			edit: {
+				featureGroup: drawnItems,
+				remove: false
+			}
+		});
+		map.addControl(drawControl);
+
+		map.on('draw:created', function (e) {
+			var type = e.layerType,
+				layer = e.layer;
+
+			if (type == 'polygon'){
+   	
+	   	var wkt_poly = "POLYGON(('"
+	   	var latlngs = layer.getLatLngs();
+   	
+	   for (var i=0;i<latlngs.length;i++){
+	   		if (i != 0){
+		   		wkt_poly += ','
+	   		}
+		   wkt_poly += latlngs[0].lng+' '+latlngs[0].lat
+	   }
+	   wkt_poly +="')),4326";
+
+	   console.log(wkt_poly);
+
+	}
+
+
+			drawnItems.addLayer(layer);
+		});
+
+
+// 	map.on('draw:created', function (e) { var type = e.layerType; var layer = e.layer; drawnItems.addLayer(layer); console.log(toWKT(layer)); });
+
+
+// 		function toWKT(layer) {
+//     var lng, lat, coords = [];
+//     if (layer instanceof L.Polygon || layer instanceof L.Polyline) {
+//         var latlngs = layer.getLatLngs();
+//         for (var i = 0; i < latlngs.length; i++) {
+//                 latlngs[i]
+//                 coords.push(latlngs[i].lng + " " + latlngs[i].lat);
+//                 if (i === 0) {
+//                         lng = latlngs[i].lng;
+//                         lat = latlngs[i].lat;
+//                 }
+//         };
+//         if (layer instanceof L.Polygon) {
+//             return "POLYGON((" + coords.join(",") + "," + lng + " " + lat + ", 4326))";
+//         } else if (layer instanceof L.Polyline) {
+//             return "LINESTRING(" + coords.join(",") + ")";
+//         }
+//     } else if (layer instanceof L.Marker) {
+//         return "POINT(" + layer.getLatLng().lng + " " + layer.getLatLng().lat + ")";
+//     }
+
+
+// }
+
+		map.on('draw:edited', function (e) {
+			var layers = e.layers;
+			var countOfEditedLayers = 0;
+			layers.eachLayer(function(layer) {
+				a = toWKT(layer)
+			});
+			console.log(a);
+		});
+
+		
+
+	</script>
+</body>
+</html>
